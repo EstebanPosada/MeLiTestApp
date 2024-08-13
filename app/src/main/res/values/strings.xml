@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">TestApp</string>
-    <string name="price">$%s</string>
-    <string name="stock">Q:%s</string>
+    <string name="price_quantity">$%s (Q:%s)</string>
+    <string name="attributes">Attributes</string>
 </resources>

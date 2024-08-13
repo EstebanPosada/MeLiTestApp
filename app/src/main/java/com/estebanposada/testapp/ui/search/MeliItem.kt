@@ -1,7 +1,5 @@
 package com.estebanposada.testapp.ui.search
 
-import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,26 +26,23 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.estebanposada.testapp.R
+import com.estebanposada.testapp.domain.Item
+import com.estebanposada.testapp.ui.resul.item
 
 
 @Composable
 fun MeLiItem(
-    title: String,
+    item: Item,
     modifier: Modifier = Modifier,
-    image: String? = "",
-    isNew: Boolean = false,
-    price: Float = 0.0f,
-    quantity: Int = 0,
 ) {
-    Log.wtf("Searching", image)
     Row(
         modifier = modifier.padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = modifier.weight(1f)) {
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current).data(image).build(),
-                contentDescription = title,
+                model = ImageRequest.Builder(LocalContext.current).data(item.thumbnail).build(),
+                contentDescription = item.title,
                 placeholder = painterResource(id = R.drawable.ic_mercado_libre),
                 contentScale = ContentScale.Fit,
                 modifier = modifier
@@ -55,13 +50,6 @@ fun MeLiItem(
                     .background(Color.LightGray)
                     .aspectRatio(4 / 2f)
             )
-            if (isNew) {
-                Image(
-                    modifier = modifier.align(Alignment.BottomEnd),
-                    painter = painterResource(id = R.drawable.ic_new),
-                    contentDescription = "new label"
-                )
-            }
         }
         Spacer(modifier = modifier.size(10.dp))
         Column(
@@ -69,9 +57,14 @@ fun MeLiItem(
                 .weight(2f),
             verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.End
         ) {
-            Text(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text(text = stringResource(id = R.string.price, price))
-            Text(text = stringResource(id = R.string.stock, quantity))
+            Text(text = item.title, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(
+                text = stringResource(
+                    id = R.string.price_quantity,
+                    item.price,
+                    item.availableQuantity
+                )
+            )
         }
     }
 }
@@ -79,22 +72,5 @@ fun MeLiItem(
 @Preview(showBackground = true)
 @Composable
 private fun MeLiItemPreview() {
-    MeLiItem(
-        title = "This is a title This is a title This is a title This is a title This is a title ",
-        image = "",
-        price = 0.0f,
-        quantity = 2
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun MeLiItemNewPreview() {
-    MeLiItem(
-        title = "This is a title This is a title This is a title This is a title This is a title ",
-        image = "",
-        price = 0.0f,
-        isNew = true,
-        quantity = 2
-    )
+    MeLiItem(item = item)
 }
