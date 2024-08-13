@@ -3,7 +3,7 @@ package com.estebanposada.testapp.app.database
 import com.estebanposada.testapp.data.source.LocalDataSource
 import com.estebanposada.testapp.domain.Item
 
-class RoomDataSource(db: ItemDatabase): LocalDataSource {
+class RoomDataSource(dao: ItemDao): LocalDataSource {
     override suspend fun isEmpty(): Boolean {
         TODO("Not yet implemented")
     }

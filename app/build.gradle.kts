@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-//    alias(libs.plugins.kapt)
-//    alias(libs.plugins.org.jetbrains.kotlin.kapt)
-//    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlinAndroidKsp)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -21,7 +21,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "URL", "\"https://api.mercadolibre.com/sites/MLA/\"")
+        buildConfigField("String", "URL", "\"https://api.mercadolibre.com/\"")
     }
 
     buildTypes {
@@ -73,14 +73,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.hilt.android)
-//    implementation (libs.retrofit)
+    implementation(libs.hilt.navigation)
+    ksp(libs.hilt.compiler)
+
     implementation(libs.retrofit.converter)
     implementation(libs.okhttp)
-    implementation(libs.room)
-//    implementation ('androidx.room:room-runtime:2.3.0')
-//    kapt 'androidx.room:room-compiler:2.3.0'
 
-//    implementation(libs.hilt.compiler)
-//    implementation("com.google.dagger:hilt-android:2.44")
-//    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation(libs.room)
+    ksp(libs.room.compiler)
+
+    implementation(libs.coil.compose)
 }

@@ -1,14 +1,22 @@
 package com.estebanposada.testapp.app.database
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class Item(
+    @PrimaryKey
     var id: String,
     var siteId: String,
     var title: String,
-    var price: Int,
+    var price: Float,
+    var condition: String?,
+    var thumbnail: String?,
     var availableQuantity: Int,
+    val attributes: AttributeList
+)
+
+data class AttributeList(
     val attributes: List<Attribute>
 )
 

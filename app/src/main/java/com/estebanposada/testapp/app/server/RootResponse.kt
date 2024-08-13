@@ -1,19 +1,26 @@
 package com.estebanposada.testapp.app.server
 
-import com.estebanposada.testapp.domain.Attribute
 import com.google.gson.annotations.SerializedName
 
 data class RootResponse(
-    val results: List<Item>
+    val results: List<ServiceItem>
 )
 
-data class Item(
+data class ServiceItem(
     var id: String,
     @SerializedName("site_id")
     var siteId: String,
     var title: String,
-    var price: Int,
+    var price: Float,
+    var condition: String?,
+    var thumbnail: String?,
     @SerializedName("available_quantity")
     var availableQuantity: Int,
-    val attributes: List<Attribute>
+    val attributes: List<ServiceAttribute>
+)
+
+data class ServiceAttribute(
+    var id: String,
+    var valueName: String?,
+    var name: String,
 )
