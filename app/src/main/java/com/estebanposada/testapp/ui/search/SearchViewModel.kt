@@ -2,7 +2,6 @@ package com.estebanposada.testapp.ui.search
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.estebanposada.testapp.data.source.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,5 +20,9 @@ class SearchViewModel @Inject constructor(
     fun onSearchChange(query: String) {
         Log.wtf("Searching", query)
         _uiState.update { it.copy(query = query) }
+    }
+
+    fun onDeleteQuery() {
+        _uiState.update { it.copy(query = "") }
     }
 }

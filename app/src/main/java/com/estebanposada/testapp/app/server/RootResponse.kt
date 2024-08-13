@@ -12,6 +12,8 @@ data class ServiceItem(
     var siteId: String,
     var title: String,
     var price: Float,
+    @SerializedName("currency_id")
+    var currency: String,
     var condition: String?,
     var thumbnail: String?,
     @SerializedName("available_quantity")

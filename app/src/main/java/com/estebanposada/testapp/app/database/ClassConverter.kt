@@ -6,7 +6,10 @@ import com.google.gson.Gson
 
 class ClassConverter {
     @TypeConverter
-    fun convertAttributeListToJSONString(attributeList: AttributeList): String = Gson().toJson(attributeList)
+    fun convertAttributeListToJSONString(attributeList: AttributeList): String =
+        Gson().toJson(attributeList)
+
     @TypeConverter
-    fun convertJSONStringToAttributeList(jsonString: String): AttributeList = Gson().fromJson(jsonString,AttributeList::class.java)
+    fun convertJSONStringToAttributeList(jsonString: String): AttributeList =
+        Gson().fromJson(jsonString, AttributeList::class.java)
 }

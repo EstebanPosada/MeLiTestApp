@@ -3,7 +3,6 @@ package com.estebanposada.testapp.ui.resul
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.estebanposada.testapp.domain.Item
+import com.estebanposada.testapp.domain.item
 import com.estebanposada.testapp.ui.search.MeLiItem
 
 @Composable
@@ -63,7 +62,7 @@ private fun ResultScreenContent(
                 textAlign = TextAlign.Center,
                 fontSize = 30.sp
             )
-            LazyColumn(modifier = modifier.height(500.dp)) {
+            LazyColumn {
                 items(uiState.items) {
                     MeLiItem(modifier = modifier.clickable { navigate(it.id) }, item = it)
                     HorizontalDivider()
@@ -84,14 +83,3 @@ private fun ResultPreview() {
 private fun ResultPreviewLoading() {
     ResultScreenContent(uiState = ResultUiState(loading = true)) {}
 }
-
-val item = Item(
-    id = "id",
-    siteId = "siteId",
-    title = "title",
-    price = 0.0f,
-    condition = "cond",
-    thumbnail = "",
-    availableQuantity = 1,
-    attributes = emptyList()
-)

@@ -12,14 +12,11 @@ interface ItemDao {
     fun getAll(): List<Item>
 
     @Query("SELECT * FROM Item WHERE id = :id")
-    fun findById(id: Int): Item
+    fun findById(id: String): Item
 
     @Query("SELECT COUNT(id) FROM Item")
-    fun movieCount(): Int
+    fun itemCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertMovies(movies: List<Item>)
-
-    @Update
-    fun updateMovie(movie: Item)
+    fun insertItems(movies: List<Item>)
 }

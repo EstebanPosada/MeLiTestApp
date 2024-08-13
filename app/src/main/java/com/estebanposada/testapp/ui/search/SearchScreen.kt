@@ -10,8 +10,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +40,7 @@ fun SearchScreen(
         uiState = uiState,
         modifier = modifier,
         onSearchChange = viewModel::onSearchChange,
+        onDeleteQuery = viewModel::onDeleteQuery,
         navigate = navigate
     )
 }
@@ -47,6 +50,7 @@ private fun SearchScreenContent(
     uiState: SearchUiState,
     modifier: Modifier = Modifier,
     onSearchChange: (String) -> Unit,
+    onDeleteQuery: () -> Unit,
     navigate: (String) -> Unit
 ) {
     Box {
@@ -68,11 +72,16 @@ private fun SearchScreenContent(
                     onSearchChange(it)
                 },
                 label = { Text(text = "Search") },
+                trailingIcon = {
+                    if (uiState.query.isNotBlank())
+                        IconButton(onClick = onDeleteQuery) {
+                            Icon(imageVector = Icons.Default.Delete, contentDescription = "delete")
+                        }
+                },
                 leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "search"
-                    )
+                    IconButton(onClick = { onSearchChange(uiState.query) }) {
+                        Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+                    }
                 },
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Search
@@ -91,6 +100,6 @@ private fun SearchScreenContent(
 @Composable
 private fun SearchPreview() {
     SearchScreenContent(
-        uiState = SearchUiState(loading = false), onSearchChange = {}
+        uiState = SearchUiState(loading = false), onSearchChange = {}, onDeleteQuery = {}
     ) {}
 }

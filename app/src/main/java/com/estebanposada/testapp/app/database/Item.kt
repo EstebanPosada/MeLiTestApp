@@ -10,17 +10,18 @@ data class Item(
     var siteId: String,
     var title: String,
     var price: Float,
+    var currency: String,
     var condition: String?,
     var thumbnail: String?,
     var availableQuantity: Int,
-    val attributes: AttributeList
+    val attributeList: AttributeList
 )
 
 data class AttributeList(
     val attributes: List<Attribute>
 )
 
-data class Attribute (
+data class Attribute(
     var id: String,
     var valueName: String,
     var name: String,

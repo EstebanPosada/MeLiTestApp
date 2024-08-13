@@ -27,7 +27,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.estebanposada.testapp.R
 import com.estebanposada.testapp.domain.Item
-import com.estebanposada.testapp.ui.resul.item
+import com.estebanposada.testapp.domain.item
 
 
 @Composable
@@ -62,6 +62,7 @@ fun MeLiItem(
                 text = stringResource(
                     id = R.string.price_quantity,
                     item.price,
+                    item.currency,
                     item.availableQuantity
                 )
             )
