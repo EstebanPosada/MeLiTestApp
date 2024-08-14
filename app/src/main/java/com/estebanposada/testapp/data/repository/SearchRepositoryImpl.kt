@@ -23,10 +23,8 @@ class SearchRepositoryImpl @Inject constructor(
         }
         ResultHandler.Success(localDataSource.getItems().map { it.asItem() })
     } catch (e: HttpException) {
-        e.printStackTrace()
         ResultHandler.Error(e.message())
     } catch (e: Exception) {
-        e.printStackTrace()
         ResultHandler.Error(e.message ?: "")
     }
 

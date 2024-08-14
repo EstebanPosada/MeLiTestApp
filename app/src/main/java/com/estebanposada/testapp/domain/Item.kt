@@ -9,6 +9,10 @@ data class Item(
     var condition: String?,
     var thumbnail: String?,
     var availableQuantity: Int,
+    val attributeList: AttributeList
+)
+
+data class AttributeList(
     val attributes: List<Attribute>
 )
 
@@ -27,5 +31,5 @@ val item = Item(
     condition = "cond",
     thumbnail = "",
     availableQuantity = 1,
-    attributes = emptyList()
+    attributeList = AttributeList(emptyList())
 )

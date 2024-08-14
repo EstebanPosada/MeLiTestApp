@@ -1,4 +1,4 @@
-package com.estebanposada.testapp.ui.resul
+package com.estebanposada.testapp.ui.result
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

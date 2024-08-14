@@ -32,10 +32,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.estebanposada.testapp.R
 import com.estebanposada.testapp.domain.Attribute
+import com.estebanposada.testapp.domain.AttributeList
 import com.estebanposada.testapp.domain.item
-import com.estebanposada.testapp.ui.theme.Banana
 import com.estebanposada.testapp.ui.theme.GreenPigment
-import com.estebanposada.testapp.ui.theme.Saffron
 
 @Composable
 fun DetailScreen(
@@ -97,7 +96,7 @@ private fun DetailScreenContent(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
-            uiState.item.attributes.forEachIndexed { index, attr ->
+            uiState.item.attributeList.attributes.forEachIndexed { index, attr ->
                 val backgroundColor = if (index % 2 == 0) Color.Gray
                 else Color.LightGray
                 Text(
@@ -126,10 +125,12 @@ private fun DetailPreview() {
         DetailUiState(
             loading = false,
             item = item.copy(
-                attributes = listOf(
-                    Attribute(id = "asd", valueName = "value", name = "name"),
-                    Attribute(id = "asd", valueName = "value", name = "name"),
-                    Attribute(id = "asd", valueName = "value", name = "name")
+                attributeList = AttributeList(
+                    listOf(
+                        Attribute(id = "asd", valueName = "value", name = "name"),
+                        Attribute(id = "asd", valueName = "value", name = "name"),
+                        Attribute(id = "asd", valueName = "value", name = "name")
+                    )
                 )
             )
         )

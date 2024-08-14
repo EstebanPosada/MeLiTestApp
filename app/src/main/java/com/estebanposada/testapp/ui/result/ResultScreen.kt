@@ -1,4 +1,4 @@
-package com.estebanposada.testapp.ui.resul
+package com.estebanposada.testapp.ui.result
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
