@@ -18,8 +18,29 @@ Product Detail Screen: Upon selecting a product from the results, users are take
 This project is built using [Android SDK/Kotlin], and follows best practices for mobile development to ensure a smooth and intuitive user experience. The app also incorporates efficient data handling and user interface design principles to provide a high-quality shopping experience.
 
 
-## :bulb: Motivation and Context
+## :bulb: Tech Stack
 
+The following technologies and libraries have been chosen for this project to ensure a robust, efficient, and maintainable Android application:
+
+Hilt: Chosen for dependency injection to streamline the management of dependencies throughout the app. Hilt simplifies the setup and injection of dependencies, which enhances code clarity and promotes a modular architecture.
+
+Retrofit & OkHttp: Used to handle network requests and data fetching efficiently. 
+
+Room: Used for storing data fetched from the server and caching it locally. This allows the app to display information from local storage, ensuring quick access and offline availability.
+
+Coil: Used for its efficiency in image loading and caching. Coil was chosen for its simplicity, performance, and ease of integration with Jetpack Compose.
+
+Jetpack Compose: Adopted for building the app’s user interface due to its modern, declarative approach to UI development. Compose allows for more dynamic and flexible UI creation, making it easier to implement complex interfaces and manage UI state.
+
+Compose Navigation: Facilitates smooth transitions and state management between screens.
+
+ViewModel: Used to manage and retain UI-related data across configuration changes. View Models help in maintaining a clear separation between the UI and business logic, which contributes to a more organized and maintainable codebase.
+
+MockK: Chosen for unit testing due to its Kotlin-specific features and ease of use.
+
+Use Cases: Implemented to encapsulate business logic and define application-specific operations.
+
+Each component of the tech stack was selected to address specific needs of the project, resulting in an efficient, maintainable, and high-performance application.
 
 ## :camera_flash: Screenshots
 
