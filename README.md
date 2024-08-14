@@ -22,23 +22,32 @@ This project is built using [Android SDK/Kotlin], and follows best practices for
 
 The following technologies and libraries have been chosen for this project to ensure a robust, efficient, and maintainable Android application:
 
-Hilt: Chosen for dependency injection to streamline the management of dependencies throughout the app. Hilt simplifies the setup and injection of dependencies, which enhances code clarity and promotes a modular architecture.
+- ### Hilt:
+  Chosen for dependency injection to streamline the management of dependencies throughout the app. Hilt simplifies the setup and injection of dependencies, which enhances code clarity and promotes a modular architecture.
 
-Retrofit & OkHttp: Used to handle network requests and data fetching efficiently. 
+- ### Retrofit & OkHttp:
+  Used to handle network requests and data fetching efficiently. 
 
-Room: Used for storing data fetched from the server and caching it locally. This allows the app to display information from local storage, ensuring quick access and offline availability.
+- ### Room:
+  Used for storing data fetched from the server and caching it locally. This allows the app to display information from local storage, ensuring quick access and offline availability.
 
-Coil: Used for its efficiency in image loading and caching. Coil was chosen for its simplicity, performance, and ease of integration with Jetpack Compose.
+- ### Coil:
+  Used for its efficiency in image loading and caching. Coil was chosen for its simplicity, performance, and ease of integration with Jetpack Compose.
 
-Jetpack Compose: Adopted for building the app’s user interface due to its modern, declarative approach to UI development. Compose allows for more dynamic and flexible UI creation, making it easier to implement complex interfaces and manage UI state.
+- ### Jetpack Compose:
+  Adopted for building the app’s user interface due to its modern, declarative approach to UI development. Compose allows for more dynamic and flexible UI creation, making it easier to implement complex interfaces and manage UI state.
 
-Compose Navigation: Facilitates smooth transitions and state management between screens.
+- ### Compose Navigation:
+  Facilitates smooth transitions and state management between screens.
 
-ViewModel: Used to manage and retain UI-related data across configuration changes. View Models help in maintaining a clear separation between the UI and business logic, which contributes to a more organized and maintainable codebase.
+- ### ViewModel:
+  Used to manage and retain UI-related data across configuration changes. View Models help in maintaining a clear separation between the UI and business logic, which contributes to a more organized and maintainable codebase.
+  
+- ### Use Cases:
+  Implemented to encapsulate business logic and define application-specific operations.
 
-MockK: Chosen for unit testing due to its Kotlin-specific features and ease of use.
-
-Use Cases: Implemented to encapsulate business logic and define application-specific operations.
+- ### MockK:
+  Chosen for unit testing due to its Kotlin-specific features and ease of use.
 
 Each component of the tech stack was selected to address specific needs of the project, resulting in an efficient, maintainable, and high-performance application.
 
