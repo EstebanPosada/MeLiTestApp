@@ -1,14 +1,18 @@
 package com.estebanposada.testapp.ui.detail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -49,61 +53,70 @@ private fun DetailScreenContent(
     uiState: DetailUiState,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(10.dp),
-        horizontalAlignment = Alignment.Start
-    ) {
-        Text(
-            modifier = modifier.fillMaxWidth(),
-            text = uiState.item.title,
-            textAlign = TextAlign.Start,
-            fontWeight = FontWeight.Bold
-        )
-        Text(text = uiState.item.condition ?: "", color = GreenPigment)
-        AsyncImage(
-            modifier = modifier
-                .height(200.dp)
-                .fillMaxWidth(),
-            model = uiState.item.thumbnail, contentDescription = uiState.item.title,
-            placeholder = painterResource(id = R.drawable.ic_mercado_libre)
-        )
-        Text(
-            text = stringResource(
-                id = R.string.price_quantity,
-                uiState.item.price.toString(),
-                uiState.item.currency,
-                uiState.item.availableQuantity
-            ), fontSize = 30.sp, color = GreenPigment
-        )
-        Text(
-            modifier = modifier.padding(10.dp),
-            text = stringResource(id = R.string.attributes),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
-        )
-        uiState.item.attributes.forEachIndexed { index, attr ->
-            val backgroundColor = if (index % 2 == 0) Saffron
-            else Banana
-            Text(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 3.dp)
-                    .clip(RoundedCornerShape(2.dp))
-                    .background(backgroundColor)
-                    .padding(horizontal = 10.dp)
-                    .padding(),
-                text = stringResource(
-                    id = R.string.attribute_detail,
-                    attr.name,
-                    attr.valueName ?: ""
-                ), fontSize = 18.sp
+    if (uiState.loading) {
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator(
+                modifier = modifier.width(100.dp),
+                color = MaterialTheme.colorScheme.secondary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
             )
         }
+    } else {
+        Column(
+            modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(10.dp),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                modifier = modifier.fillMaxWidth(),
+                text = uiState.item.title,
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Bold
+            )
+            Text(text = uiState.item.condition ?: "", color = GreenPigment)
+            AsyncImage(
+                modifier = modifier
+                    .height(200.dp)
+                    .fillMaxWidth(),
+                model = uiState.item.thumbnail, contentDescription = uiState.item.title,
+                placeholder = painterResource(id = R.drawable.ic_mercado_libre)
+            )
+            Text(
+                text = stringResource(
+                    id = R.string.price_quantity,
+                    uiState.item.price.toString(),
+                    uiState.item.currency,
+                    uiState.item.availableQuantity
+                ), fontSize = 30.sp, color = GreenPigment
+            )
+            Text(
+                modifier = modifier.padding(10.dp),
+                text = stringResource(id = R.string.attributes),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+            uiState.item.attributes.forEachIndexed { index, attr ->
+                val backgroundColor = if (index % 2 == 0) Color.Gray
+                else Color.LightGray
+                Text(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 3.dp)
+                        .clip(RoundedCornerShape(2.dp))
+                        .background(backgroundColor)
+                        .padding(horizontal = 10.dp)
+                        .padding(),
+                    text = stringResource(
+                        id = R.string.attribute_detail,
+                        attr.name,
+                        attr.valueName ?: ""
+                    ), fontSize = 18.sp
+                )
+            }
+        }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -111,6 +124,7 @@ private fun DetailScreenContent(
 private fun DetailPreview() {
     DetailScreenContent(
         DetailUiState(
+            loading = false,
             item = item.copy(
                 attributes = listOf(
                     Attribute(id = "asd", valueName = "value", name = "name"),

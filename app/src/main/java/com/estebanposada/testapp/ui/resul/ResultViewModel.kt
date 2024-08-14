@@ -1,9 +1,8 @@
 package com.estebanposada.testapp.ui.resul
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.estebanposada.testapp.data.source.SearchRepository
+import com.estebanposada.testapp.app.server.ResultHandler
 import com.estebanposada.testapp.usecase.GetItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,10 +24,16 @@ class ResultViewModel @Inject constructor(private val searchUseCase: GetItemsUse
     }
 
     fun searchItems(query: String) {
-        Log.wtf("Searching", "Result - ${uiState.value.query}")
         viewModelScope.launch {
-            val result = searchUseCase.execute(query)
-            _uiState.update { it.copy(items = result, loading = false) }
+            when (val result = searchUseCase.execute(query)) {
+                is ResultHandler.Error -> _uiState.update {
+                    it.copy(loading = false, isError = true)
+                }
+
+                is ResultHandler.Success -> _uiState.update {
+                    it.copy(items = result.data, isError = false, loading = false)
+                }
+            }
         }
     }
 

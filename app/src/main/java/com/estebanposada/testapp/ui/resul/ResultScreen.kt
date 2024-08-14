@@ -1,7 +1,9 @@
 package com.estebanposada.testapp.ui.resul
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -14,12 +16,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.estebanposada.testapp.R
 import com.estebanposada.testapp.domain.item
 import com.estebanposada.testapp.ui.search.MeLiItem
 
@@ -47,21 +52,29 @@ private fun ResultScreenContent(
     navigate: (String) -> Unit
 ) {
     if (uiState.loading) {
-        CircularProgressIndicator(
-            modifier = modifier.width(100.dp),
-            color = MaterialTheme.colorScheme.secondary,
-            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-        )
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator(
+                modifier = modifier.width(100.dp),
+                color = MaterialTheme.colorScheme.secondary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
+        }
     } else {
         Column {
             Text(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(10.dp),
-                text = uiState.query,
+                text = stringResource(id = R.string.searching_for, uiState.query),
                 textAlign = TextAlign.Center,
                 fontSize = 30.sp
             )
+            if (uiState.isError) {
+                Text(
+                    text = stringResource(id = R.string.error_message),
+                    textAlign = TextAlign.Center
+                )
+            }
             LazyColumn {
                 items(uiState.items) {
                     MeLiItem(modifier = modifier.clickable { navigate(it.id) }, item = it)
@@ -81,5 +94,5 @@ private fun ResultPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun ResultPreviewLoading() {
-    ResultScreenContent(uiState = ResultUiState(loading = true)) {}
+    ResultScreenContent(uiState = ResultUiState(isError = true)) {}
 }

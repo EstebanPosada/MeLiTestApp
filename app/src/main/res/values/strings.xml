@@ -3,4 +3,6 @@
     <string name="price_quantity">$%s %s (Q:%s)</string>
     <string name="attributes">Info</string>
     <string name="attribute_detail">%s : %s</string>
+    <string name="searching_for">Searching for: \"%s\"</string>
+    <string name="error_message">Something went wrong, please check your internet connection and try again later</string>
 </resources>

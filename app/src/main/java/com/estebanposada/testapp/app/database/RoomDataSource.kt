@@ -12,5 +12,8 @@ class RoomDataSource(private val dao: ItemDao) : LocalDataSource {
 
     override suspend fun getItems(): List<Item> = withContext(Dispatchers.IO) { dao.getAll() }
 
-    override suspend fun findById(id: String): Item = withContext(Dispatchers.IO) { dao.findById(id) }
+    override suspend fun findById(id: String): Item =
+        withContext(Dispatchers.IO) { dao.findById(id) }
+
+    override suspend fun deleteAll() = withContext(Dispatchers.IO) { dao.deleteAll() }
 }

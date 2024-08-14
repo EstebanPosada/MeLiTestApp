@@ -2,6 +2,7 @@ package com.estebanposada.testapp.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.estebanposada.testapp.app.server.ResultHandler
 import com.estebanposada.testapp.usecase.FindItemByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,10 +19,16 @@ class DetailViewModel @Inject constructor(private val findItemByIdUseCase: FindI
     val uiState: StateFlow<DetailUiState>
         get() = _uiState.asStateFlow()
 
+    init {
+        _uiState.update { it.copy(loading = true) }
+    }
+
     fun getItem(id: String) {
         viewModelScope.launch {
-            val result = findItemByIdUseCase.execute(id)
-            _uiState.update { it.copy(item = result) }
+            when (val result = findItemByIdUseCase.execute(id)) {
+                is ResultHandler.Success -> _uiState.update { it.copy(item = result.data, loading = false) }
+                is ResultHandler.Error -> _uiState.update { it.copy() }
+            }
         }
     }
 }

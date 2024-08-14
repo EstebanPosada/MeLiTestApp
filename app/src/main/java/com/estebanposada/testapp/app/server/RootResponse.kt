@@ -23,6 +23,7 @@ data class ServiceItem(
 
 data class ServiceAttribute(
     var id: String,
+    @SerializedName("value_name")
     var valueName: String?,
     var name: String,
 )

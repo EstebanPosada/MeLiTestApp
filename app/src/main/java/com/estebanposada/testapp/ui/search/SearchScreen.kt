@@ -41,7 +41,10 @@ fun SearchScreen(
         modifier = modifier,
         onSearchChange = viewModel::onSearchChange,
         onDeleteQuery = viewModel::onDeleteQuery,
-        navigate = navigate
+        navigate = {
+            viewModel.refreshData()
+            navigate(it)
+        }
     )
 }
 
@@ -79,7 +82,9 @@ private fun SearchScreenContent(
                         }
                 },
                 leadingIcon = {
-                    IconButton(onClick = { onSearchChange(uiState.query) }) {
+                    IconButton(onClick = {
+                        navigate(uiState.query)
+                    }) {
                         Icon(imageVector = Icons.Default.Search, contentDescription = "search")
                     }
                 },

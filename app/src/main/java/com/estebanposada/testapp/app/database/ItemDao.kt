@@ -19,4 +19,7 @@ interface ItemDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertItems(movies: List<Item>)
+
+    @Query("DELETE FROM Item")
+    fun deleteAll()
 }
